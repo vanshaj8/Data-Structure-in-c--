@@ -1,0 +1,110 @@
+#include <iostream>
+using namespace std;
+
+class Node
+{
+	public:
+		int value;
+		Node *next;
+};
+
+class linked
+{
+	public:
+		Node *head,*tail;
+		linked()
+		{
+			head=NULL;
+			tail=NULL;
+		}
+		
+		
+		void push(int data) // Insertion at the end
+		{
+			
+			Node *temp= new Node;
+			temp->value=data;
+			temp->next=NULL;
+			
+			if(head==NULL)
+			{
+				head=temp;
+				tail=temp;
+			}
+			else
+			{
+				tail->next=temp;
+			
+				tail=temp;
+			}		
+		}
+		
+		void push_beg(int x) // Insertion at the begiing
+		{
+			Node *hell;
+			hell->value=x;
+			hell->next=head;
+			head=hell;
+			
+		}
+		
+		void display()
+		{
+			Node *ptr;
+			ptr=head;
+			
+			while(ptr!=NULL)
+			{
+				cout<<ptr->value<<" ";
+				ptr=ptr->next;
+			}
+		}
+		
+		void del_beg() // Del at the beggining
+		{
+			Node *dell;
+			dell=head;
+			head=head->next;
+			dell->next=NULL;	
+		}	
+		
+		void del_end() // Deletion at the end
+		{
+			Node *ptrr;
+			ptrr=head;
+			
+			while(ptrr->next!=tail)
+			{
+				ptrr=ptrr->next;
+			}
+			ptrr->next=NULL;
+			tail=ptrr;	
+		}
+		
+		
+};
+int main()
+{
+	linked l;
+	l.push(5);
+	l.push(4);
+	l.push(3);
+	l.push(2);
+	l.display();
+	l.del_beg();
+	cout<<"After deletion";
+	l.display();
+	cout<<"Deletion at the end is"<<"\n";
+	l.del_end();
+	l.push(7);
+	l.display();
+	cout<<" ";
+	cout<<l.head->value;
+	cout<<" ";
+	cout<<l.head->next;
+	cout<<" ";
+	cout<<"After addition is";
+	l.push(10);
+	l.display();
+	return 0;
+}
