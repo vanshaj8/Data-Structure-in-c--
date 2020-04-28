@@ -1,0 +1,48 @@
+#include <iostream>
+using namespace std;
+
+int stack[100];
+int top=-1;// top 0f the stack
+
+void push(int x)
+{ 
+	top=top+1;
+	stack[top]=x;  // or i can use  stack[++top]=x // which means pre increment first it will increment and then  assign		
+}
+
+void pop()
+{
+	top=top-1;
+}
+
+void print()
+{
+	int i;
+	cout<<" The stack is";
+	for(i=0;i<=top;i++)
+	{
+		cout<<stack[i];
+	}
+}
+
+int toop()
+{
+	cout<<stack[top];
+}
+
+ int main()
+ {
+ 	push(5);
+ 	push(4);
+ 	push(3);
+ 	push(2);
+ 	push(1);
+ 	pop();
+ 	pop();
+ 	print();
+ 	cout<<"The top is";
+ 	toop();
+ 	
+ 	
+ 	return 0 ;
+ }
