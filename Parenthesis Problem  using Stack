@@ -1,7 +1,7 @@
-#include <iostream>
+#include<iostream>
 #include<string.h>
 using namespace std;
-char stack[100];  // Stack Is declared globally
+char stack[100];
 int top=-1;
 
 void push(char x)
@@ -12,49 +12,57 @@ void push(char x)
 
 void pop(char t)
 {
-	if(stack[top]=='}')
+	if(t=='}')
 	{
-		top=top-1;
+		if(stack[top]=='{')
+		{
+			top=top-1;
+		}
+		
 		// the  parenthesis {} is complete 
 	}
-	else if(stack[top]==')')
+	else if(t==')')
 	{
-		top=top-1;
+		if(stack[top]=='(')
+		{
+			top=top-1;
+		}
 		// the parenthesis is complete
 	}
-	else
+	else if(t==']')
 	{
-		top=top-1;
-		// The parenthseis []is complete;
+		if(stack[top]=='[')
+		{
+			top=top-1;
+		}
+		// the parenthesis is complete
 	}
+	
 }
-
-
 
 void display()
 {
-	int i;
-	
-	cout<<"The gevien stack is ";
 	if(top==-1)
 	{
-		cout<<"VALID";
+		cout<<"YES";
+	}
+	else if(top==0)
+	{
+		cout<<"NO";
 	}
 	else
 	{
-		cout<<"INVALID";
+		cout<<"NO";
 	}
 }
 
-int main()
+void perform()
 {
-	
-	char str[36],x,t;
-	cout<<"Enter the string";
+	char str[100],x,t;
 	cin>>str;
-	int  k,i;
+	int k,i;
 	k=strlen(str);
-	
+
 	for(i=0;i<k;i++)
 	{
 		if(str[i]=='{'||str[i]=='['||str[i]=='(')
@@ -67,10 +75,48 @@ int main()
 			t=str[i];
 			pop(t);
 		}
+
 	}
 	
-	display();
+
+
 	
+}
+
+int main()
+{
+	int n;
+	cin>>n;
+	int i;
+
+	for(int i=0;i<n;i++)
+	{
+		perform();
+		display();
+		cout<<"\n";
+	}
 	
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
