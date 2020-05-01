@@ -1,0 +1,48 @@
+#include <iostream>
+using namespace std;
+// Array based Implementation
+int queue[10];
+int front=-1;
+int rear=-1;
+
+void push(int x) // YOU CAN ALSO USE ENQUEUE
+{
+	rear=rear+1;
+	queue[rear]=x;
+}
+
+void pop() // YOU CAN ALSO USE DEQUEUE
+{
+	front=front+1;
+}
+
+void isEmpty()
+{
+	if(rear==-1&&front==-1)
+	{
+		cout<<"EMPTY";
+	}
+	else
+	{
+		cout<<"Not EMpty";
+	}
+}
+
+void display()
+{
+	for(int i=0;i<=rear;i++)
+	{
+		cout<<queue[i];
+	}
+}
+int main()
+{
+	push(5);
+	push(4);
+	push(3);
+	pop();
+	display();
+	cout<<" "<<rear+1;
+	
+	return 0;
+}
