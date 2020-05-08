@@ -1,0 +1,87 @@
+#include<iostream>
+using namespace std;
+
+struct node
+{
+	int data;
+	node* next;
+};
+node* head;
+node* tail;
+
+void insert(int value)  // Insertion at the end
+{
+	node* temp=new node();
+	temp->data=value;
+	temp->next=NULL;
+	if(head==NULL)
+	{
+		head=temp;
+		tail=temp;
+	}
+	else
+	{
+		temp->next=tail->next;
+		tail->next=temp;
+		tail=temp;
+	}	
+}
+
+void ins_beg(int value) // Insertion at the beging
+{
+	node* temp=new node();
+	temp->data=value;	
+	temp->next=head;
+	head=temp;
+}
+
+void del_end()
+{
+   node* ptr;
+   ptr=head;
+   while(ptr->next!=tail)
+   {
+   	  ptr=ptr->next;
+	}
+	ptr->next=NULL;	
+}
+void del_beg()
+{
+	node* ptr;
+	ptr=head->next;
+	head->next=NULL;
+	head=ptr;
+	
+}
+void display() { 
+   node* ptr;
+   ptr = head;
+   while (ptr != NULL) { 
+      cout<< ptr->data <<" "; 
+      ptr = ptr->next; 
+   } 
+} 
+
+int main()
+{
+   insert(3);
+   insert(1);
+   insert(7);
+   insert(2);
+   insert(9);
+   cout<<"The linked list is: ";
+   display();
+   ins_beg(10);
+   cout<<"\n"<<"The linked list is: ";
+   display();
+   del_end();
+   cout<<"\n"<<"The linked list is: ";
+   display();
+   del_beg();
+	cout<<"\n"<<"The linked list is: ";
+   display();
+	
+	
+	
+	return 0;
+}
