@@ -1,0 +1,57 @@
+#include<iostream>
+using namespace std;
+
+struct node
+{
+	int data;
+	node* next;
+	node* prev;
+};
+node* head;
+node* tail;
+
+void insert(int value)
+{
+	node* temp= new node();
+	temp->data=value;
+	temp->next=NULL;
+	temp->prev=NULL;
+	if(head==NULL)
+	{
+		head=temp;
+		tail=temp;
+	}
+	else
+	{
+		temp->next=tail->next;
+		tail->next=temp;
+		temp->prev=tail;
+		tail=temp;
+	}
+	
+}
+
+void display()
+{
+	node* ptr;
+	ptr=head;
+	
+	while(ptr!=NULL)
+	{
+		cout<<ptr->data<<" ";
+		ptr=ptr->next;
+	}
+}
+
+int main()
+{
+	insert(5);
+	insert(4);
+	insert(3);
+	insert(2);
+	insert(1);
+	cout<<"the list is ";
+	display();
+	
+	return 0;
+}
