@@ -1,0 +1,46 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+#define MAX 50
+char stack[MAX];
+int top=-1;
+
+void push(char a)
+{
+	top=top+1;
+	stack[top]=a;
+}
+void pop()
+{
+	top=top-1;;
+}
+
+void reverse(char str[],int k)
+{
+	for(int i=0;i<k;i++)
+	{
+		push(str[i]);
+	}
+	
+	for(int j=0;j<k;j++)
+	{
+		str[j]=stack[top];
+		pop();
+	}
+}
+
+int main()
+{
+	char str[100];
+	int k;
+	cout<<"Enter the string";
+	gets( str);
+	k=strlen(str);
+	reverse(str, k);
+
+	cout<<str;
+	
+	
+	
+return 0;
+}
