@@ -1,122 +1,63 @@
 #include<iostream>
 #include<string.h>
+#include<stack>
 using namespace std;
-char stack[100];
-int top=-1;
 
-void push(char x)
+bool arepair(char open,char close)
 {
-	top=top+1;
-	stack[top]=x;
+	if(open=='{'&&close=='}')
+	{
+		return true;
+	}
+		if(open=='['&&close==']')
+	{
+		return true;
+	}
+		if(open=='('&&close==')')
+	{
+		return true;
+	}
+	return false;
 }
-
-void pop(char t)
+bool areparenthesisbalance(string str)
 {
-	if(t=='}')
+	stack<char>s;
+	for(int i=0;i<str.length();i++)
 	{
-		if(stack[top]=='{')
+		if((str[i]=='{')||(str[i]=='[')||(str[i]=='('))
 		{
-			top=top-1;
+			s.push(str[i]);
 		}
-		
-		// the  parenthesis {} is complete 
-	}
-	else if(t==')')
-	{
-		if(stack[top]=='(')
+		else if((str[i]=='}')||(str[i]==']')||(str[i]==')'))
 		{
-			top=top-1;
+			if(s.empty()||!arepair(s.top(),str[i]))
+			{
+				return false;
+			}
+			else
+			{
+				s.pop();
+			}
 		}
-		// the parenthesis is complete
-	}
-	else if(t==']')
-	{
-		if(stack[top]=='[')
-		{
-			top=top-1;
-		}
-		// the parenthesis is complete
 	}
 	
+	return s.empty() ? true:false;
 }
-
-void display()
-{
-	if(top==-1)
-	{
-		cout<<"YES";
-	}
-	else if(top==0)
-	{
-		cout<<"NO";
-	}
-	else
-	{
-		cout<<"NO";
-	}
-}
-
-void perform()
-{
-	char str[100],x,t;
-	cin>>str;
-	int k,i;
-	k=strlen(str);
-
-	for(i=0;i<k;i++)
-	{
-		if(str[i]=='{'||str[i]=='['||str[i]=='(')
-		{
-			x=str[i];
-			push(x);
-		}
-		else if(str[i]=='}'||str[i]==']'||str[i]==')')
-		{
-			t=str[i];
-			pop(t);
-		}
-
-	}
-	
-
-
-	
-}
-
 int main()
 {
 	int n;
+	string str;
 	cin>>n;
-	int i;
-
 	for(int i=0;i<n;i++)
 	{
-		perform();
-		display();
-		cout<<"\n";
+		cin>>str;
+		if(areparenthesisbalance(str))
+		{
+			cout<<"YES";
+		}
+		else
+		{
+			cout<<"NO";
+		}
 	}
-	
-	return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
