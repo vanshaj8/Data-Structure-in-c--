@@ -1,48 +1,76 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
-// Array based Implementation
-int queue[10];
+#define MAX 10
+int arr[MAX];
 int front=-1;
 int rear=-1;
 
-void push(int x) // YOU CAN ALSO USE ENQUEUE
+bool isEmpty()
 {
-	rear=rear+1;
-	queue[rear]=x;
+	return(front==-1&& rear==-1);
 }
-
-void pop() // YOU CAN ALSO USE DEQUEUE
+bool isfull()
 {
-	front=front+1;
+	return (rear+1)%MAX==front ? true:false;
 }
-
-void isEmpty()
+void enqueue(int x)
 {
-	if(rear==-1&&front==-1)
+	if(isfull())
 	{
-		cout<<"EMPTY";
+		cout<<"Queue is full";
+	}
+	else if(isEmpty())
+	{
+		front=rear=0;
 	}
 	else
 	{
-		cout<<"Not EMpty";
+		rear=(rear+1)%MAX;
+	}
+	arr[rear]=x;
+}
+void dequeue()
+{
+	if(isEmpty())
+	{
+		cout<<"Queue is EMpty";
+	}
+	else if(front==rear)
+	{
+		rear=front=-1;
+	}
+	else
+	{
+		front=(front+1)%MAX;
 	}
 }
 
 void display()
 {
-	for(int i=0;i<=rear;i++)
+	if(isEmpty())
 	{
-		cout<<queue[i];
+		cout<<"Empty";
 	}
+	else
+	{ int i;
+		for(i=front;i!=rear;i=(i+1)%MAX)
+		{
+			cout<<arr[i];
+		}
+		cout<<arr[i];
+	}
+	
 }
+
 int main()
 {
-	push(5);
-	push(4);
-	push(3);
-	pop();
-	display();
-	cout<<" "<<rear+1;
-	
+	enqueue(5);
+	 enqueue(4);
+	 enqueue(3);
+	 enqueue(2);
+	 enqueue(1);
+	 dequeue();
+	 dequeue();
+	 display();	
 	return 0;
 }
