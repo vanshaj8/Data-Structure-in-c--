@@ -1,0 +1,127 @@
+#include<iostream>
+#include<queue>
+#include <list>
+#include<algorithm> 
+using namespace std;
+
+struct bstnode
+{
+	int data;
+	bstnode* left;
+	bstnode* right;
+};
+
+bstnode* getnewnode(int value)
+{
+	bstnode* newnode= new bstnode();
+	newnode->data=value;
+	newnode->left=NULL;
+	newnode->right=NULL;
+	
+	return newnode;
+}
+
+bstnode* insert(bstnode* root, int value)
+{
+	if(root==NULL)
+	{
+		root=getnewnode(value);
+	}
+	else if(value<=root->data)
+	{
+		root->left=insert(root->left,value);
+	}
+	else
+	{
+		root->right=insert(root->right,value);
+	}
+	
+	return root;
+}
+
+bool search(bstnode* root, int value)
+{
+	if(root==NULL)
+	{
+		return false;
+	}
+	else if(root->data==value)
+	{
+		return true;
+	}
+	else if(value<=root->data)
+	{
+		return search(root->left,value);
+	}
+	else
+	{
+		return search(root->right,value);
+	}
+}
+
+
+bool printpath(bstnode* root,int sum)
+{
+	if(root==NULL)
+	{
+		return false;
+	}
+	else
+	{
+		bool ans=false;
+		int subsum=sum - root->data;
+		
+		if(subsum==0&&root->left==NULL&&root->right==NULL)
+		{
+			return true;
+		}
+		if(root->left)
+		{
+			ans=ans||printpath(root->left,subsum);
+		}
+		if(root->right)
+		{
+			ans=ans||printpath(root->right,subsum);
+		}
+		
+		return ans;
+		
+	}
+}
+
+int main()
+{
+	bstnode* root=NULL;
+	root = insert(root,15);	
+	root = insert(root,10);	
+	root = insert(root,20);
+	root = insert(root,25);
+	root = insert(root,8);
+	root = insert(root,12);
+	
+	int n;
+	cin>>n;
+	
+	if(search(root,n)==true)
+	{
+		cout<<"found";
+	}
+	else
+	{
+		cout<<"not found";
+	}
+	
+	if(printpath(root,33))
+	{
+		cout<<"exist";
+	}
+	else
+	{
+		cout<<"not exist";
+	}
+
+
+	
+	
+	return 0;
+}
