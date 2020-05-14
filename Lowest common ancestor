@@ -1,0 +1,18 @@
+bstnode* lowestcommonancesstor(bstnode* root,int a,int b)
+{
+	if(root==NULL)
+	{
+		return NULL;
+	}
+	if(root->data>a&&root->data>b)
+	{
+		return lowestcommonancesstor(root->left,a,b);
+	}
+	if(root->data<a&&root->data<b)
+	{
+		return lowestcommonancesstor(root->right,a,b);
+	}
+	
+	return root;
+	
+}
