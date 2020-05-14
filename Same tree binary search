@@ -1,0 +1,83 @@
+#include <iostream>
+#include<math.h>
+using namespace std;
+// Defination of Node for binary search tree
+struct bstnode
+{
+	int data;
+	bstnode* left;
+	bstnode* right;
+};
+// Function to create a new node in heap
+
+bstnode* getnewnode(int data)
+{
+	bstnode* newnode= new bstnode();
+	newnode->data=data;
+	newnode->left=newnode->right=NULL;
+	
+	return newnode;
+}
+// To insert data in BST , Returns address of root node
+bstnode* insert(bstnode* root,int data)
+{
+	if(root==NULL) // Empty tree
+	{
+		root=getnewnode(data);
+	}
+	else if(data<=root->data) // If data to be inserted is lesser, insert in left subtree
+	{
+		root->left=insert(root->left,data);
+	}
+	else // isert in right subtree
+	{
+		root->right=insert(root->right,data);	
+	}
+	return root;	
+}
+
+
+
+bool sametree(bstnode* root,bstnode* root2)
+{
+	if(root==NULL &&root2==NULL)
+	{
+		return true;
+	}
+	if(root==NULL||root2==NULL)
+	{
+		return false;
+	}
+	return root->data==root2->data&&sametree(root->left,root2->left)&&sametree(root->right,root2->right);
+}
+int main()
+{
+	bstnode* root=NULL;
+	root=insert(root,15);
+	root = insert(root,10);	
+	root = insert(root,20);
+	root = insert(root,25);
+	root = insert(root,8);
+	root = insert(root,12);
+	
+	
+	bstnode* root2=NULL;
+	root2=insert(root2,15);
+		root2 = insert(root2,10);	
+	root2 = insert(root2,20);
+	root2 = insert(root2,25);
+	root2 = insert(root2,8);
+	root2 = insert(root2,12);
+	
+	if(sametree(root,root2)==true)
+	{
+		cout<<"true";
+	}
+	else
+	{
+		cout<<"false";
+	}
+	
+	
+	return 0;
+}
