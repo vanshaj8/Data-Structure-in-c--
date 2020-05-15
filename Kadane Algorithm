@@ -1,0 +1,30 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+void kadane(int arr[],int k)
+{
+	int max_current,max_global;
+	max_current=max_global=arr[0];
+	
+	for(int i=1;i<=k-1;i++)
+	{
+		max_current=max(arr[i],max_current+arr[i]);
+		if(max_current>max_global)
+		{
+			max_global=max_current;
+		}
+	} 
+	cout<<max_global;
+	
+}
+int main()
+{
+	int arr[]={-2,3,2,-1};
+	int z[]={-2,-3,4,-1,-2,1,5,-3};
+	int l=sizeof(z)/sizeof(z[0]);
+	int k=sizeof(arr)/sizeof(arr[0]);
+	kadane(arr,k);
+	cout<<"\n";
+	kadane(z,l);
+	return 0;
+}
