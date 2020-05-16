@@ -1,0 +1,21 @@
+#include<iostream>
+using namespace std;
+
+// String Search Algorithm
+// Rabin Karp Algorithm
+
+/*
+   prime=3 (assume)
+   1:x=oldhash - val(old char)
+   2:x=x/prime
+   3:new hash= x+ prime^m-1 * val(new char)
+*/
+
+int main()
+{
+	
+	
+	
+	
+	return 0;
+}
