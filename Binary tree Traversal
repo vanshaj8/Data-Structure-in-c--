@@ -1,0 +1,121 @@
+// Array Represenation of Binary tree
+#include<iostream>
+using namespace std;
+#include<string.h>
+char tree[10];
+
+int root(char key)
+{
+	if(tree[0]!='\0')
+	{
+		cout<<"Tree already had a root";
+	}
+	else
+	{
+		tree[0]=key;
+	}
+	
+	return 0;
+}
+int set_leftchild(char key,int parent)
+{
+	if(tree[parent]=='\0')
+	{
+		cout<<" cant set a child at this position"<<(2*parent)+1;
+	}
+	else
+	{
+		tree[(2*parent)+1]=key;
+	}
+	
+	return 0;
+}
+
+int set_rightchild(char key,int parent)
+{
+	if(tree[parent]=='\0')
+	{
+		cout<<" Cant set a child at position"<<(parent*2)+2;
+	}
+	else
+	{
+		tree[(2*parent)+2]=key;
+	}
+	
+	return 0;
+}
+
+int print_bt()
+{
+	for(int i=0;i<10;i++)
+	{
+		if(tree[i]!='\0')
+		{
+			cout<<tree[i];
+		}
+		else
+		{
+			cout<<"-";
+		}
+	}
+	
+	return 0;
+}
+
+void preorder(int pos)
+{
+	if(tree[pos]=='\0')
+	{
+		return ;
+	}
+	cout<<tree[pos];
+	preorder((2*pos)+1);
+	preorder((2*pos)+2);
+}
+
+void inorder(int pos)
+{
+	
+	if(tree[pos]=='\0')
+	{
+		return ;
+	}
+	inorder((2*pos)+1);
+	cout<<tree[pos];
+	inorder((2*pos)+2);
+	
+}
+
+void postorder(int pos)
+{
+		if(tree[pos]=='\0')
+	{
+		return ;
+	}
+	postorder((2*pos)+1);
+	inorder((2*pos)+2);
+	cout<<tree[pos];
+
+
+}
+int main()
+{
+	root('A');
+	set_leftchild('B',0);
+	set_rightchild('C',0);
+	set_leftchild('D',1);
+	set_rightchild('E',1);
+	set_leftchild('f',2);
+	set_rightchild('g',2);
+	set_leftchild('h',3);
+	print_bt();
+	cout<<"\n";
+	inorder(0);
+	cout<<"\n";
+	preorder(0);
+	cout<<"\n";
+	postorder(0);
+	
+	
+	return 0;
+}
