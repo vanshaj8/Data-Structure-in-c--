@@ -1,0 +1,45 @@
+/*      Vectors
+ 
+ Working with vectors
+ It is like a container that store values
+ No fixed length and is like a dynamic array with no inital capacity
+ vector increases the capacity by 2 automatically suppose there are 2 position 
+ in an vector the next value enetered would increase the size of the vector by 4 ie 2*2 times*
+ It is totally different from the concept of linked lists
+ 
+*/ 
+#include<iostream>
+#include<vector>
+using namespace std;
+
+int main()
+{
+	vector<int>v1; // Will create a blank Vector
+	vector<string>v2;// On the spot initalisation
+	vector<int> v3(5); // This is used for setting the capacity of 5
+	// If i wrote something like this
+	vector<int>v4(5,10);// It will store 10 in each five blocks
+   // cout<<v4[0]; // Will print the value of v4 at index 0 which is 10
+	
+ v1.push_back(4);
+	  v1.push_back(3); // Adding the Elements in the last
+	 // cout<<v1[0];
+	 cout<<v1.capacity()<<" \n";  // Will return the capacity of the vector
+	 // v1.pop_back();
+	
+	  // v1.clear();// Will delete all the values form the vector
+	 
+	 cout<<v1.at(1)<<"\n"; // Will return the data at the adress mentioned inseide the braces 
+	 cout<<v1.front()<<"\n";
+	 cout<<v1.back()<<"\n";
+	// To insert at a particular operator
+	vector<int>:: iterator it=v1.begin(); // This will point at the starting block
+	v1.insert(it+1,20);
+	
+	 for(int i=0;i<v1.size();i++)
+	 {
+	 	cout<<v1[i];
+	 }
+	 
+	return 0;
+}
