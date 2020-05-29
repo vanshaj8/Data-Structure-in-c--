@@ -1,0 +1,71 @@
+#include <iostream>
+#include<vector>
+#include<stack>
+using namespace std;
+
+void add_edge(vector<int>graph[],int v,int e)
+{
+  graph[v].push_back(e);
+  graph[e].push_back(v);
+}
+void display_graph(vector<int>graph[],int size)
+{
+  for(int v=0;v<size;v++)
+  {
+    cout<<"Adjacent of "<<v <<"is "<<" ";
+    for(auto x: graph[v])
+    {
+      cout<<"->"<<x;
+    }
+    cout<<"\n";
+  }
+}
+
+void dfs_traversal(vector<int> graph[],bool vis[],int vertex,int x)
+{
+    stack<int>stack;
+    stack.push(x);
+    while(!stack.empty())
+    {
+       int current =stack.top();
+       stack.pop();
+       if(!vis[current])
+       {
+         cout<<current<<" ";
+         vis[current]=true;
+       }
+
+       for(auto i=graph[current].begin();i!=graph[current].end();i++)
+       {
+         if(!vis[*i])
+         {
+           stack.push(*i);
+
+         }
+       }
+    }
+
+}
+int main()
+{
+
+  int vertex=5;
+  vector<int> graph[vertex];
+add_edge(graph,0,1);
+add_edge(graph,0,3);
+add_edge(graph,0,4);
+add_edge(graph,1,2);
+add_edge(graph,1,4);
+add_edge(graph,2,4);
+add_edge(graph,3,4);
+
+bool vis[]={false};
+
+cout<<"dfs is"<<"\n";
+dfs_traversal(graph,vis,vertex,2);
+
+
+
+
+  return 0;
+}
