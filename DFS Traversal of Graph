@@ -1,0 +1,58 @@
+#include<iostream>
+#include<list>
+using namespace std;
+class Graph
+{
+        int v;
+        list<int> *adj;
+        public:
+        Graph(int v):v(v)
+        {
+                adj=new list<int>[v];
+        }
+        void addEdge(int v,int w)
+        {
+                adj[v].push_back(w);
+        }
+        void DFS(int s);
+};
+  
+void Graph::DFS(int s)
+{
+        bool *visited=new bool[v];
+        for(int i=0;i<v;i++)
+                visited[i]=false;
+        list<int> stack;
+        stack.push_front(s);
+        visited[s]=true;
+        list<int>::reverse_iterator i;
+        while(!stack.empty())
+        {
+                s=stack.front();
+                cout<<s<<" ";
+                stack.pop_front();
+                for(i=adj[s].rbegin();i!=adj[s].rend();++i)
+                {
+                        if(!visited[*i])
+                        {
+                                stack.push_front(*i);
+                                visited[*i]=true;
+                        }
+                }
+        }
+
+}
+int main()
+{
+        Graph g(4);
+        g.addEdge(0,1);
+        g.addEdge(0,2);
+        g.addEdge(1,2);
+        g.addEdge(2,0);
+        g.addEdge(2,3);
+        g.addEdge(3,3);
+        cout<<"DFS Traversal of Graph: ";
+        g.DFS(2);
+        cout<<endl;
+        return 0;
+}
