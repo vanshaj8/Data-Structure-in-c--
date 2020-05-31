@@ -1,0 +1,62 @@
+#include <iostream>
+using namespace std;
+#include<vector>
+#include<stack>
+#include<queue>
+stack<int>graph_stack;
+
+void add_edge(vector<int> graph[],int v ,int e)
+{
+  graph[v].push_back(e);
+}
+
+void topological_sort(vector<int>graph[],int vertex,bool vis[])
+{
+  
+    for(int i=0;i<vertex;i++)
+    {
+      if(!vis[i])
+      {
+        vis[i]=true;
+        for(auto x: graph[i])
+        {
+          if(!vis[x])
+          {
+            vis[x]=true;
+            graph_stack.push(x);
+          }
+        }
+         graph_stack.push(i);
+      }
+      
+    }
+  
+
+}
+
+void print_stack()
+{
+  while(graph_stack.empty()==false)
+  {
+    cout<<graph_stack.top()<<" ";
+    graph_stack.pop();
+  }
+}
+
+int main()
+{
+  int vertex=6;
+  vector<int> graph[vertex];
+  add_edge(graph,5,2);
+  add_edge(graph,5,0);
+  add_edge(graph,4,0);
+  add_edge(graph, 4,1);
+  add_edge(graph, 2,3);
+  add_edge(graph,3,1);
+  cout<<"sort is";
+  bool vis[]={false};
+  topological_sort(graph ,vertex,vis);
+  print_stack();
+
+  return 0;
+}
